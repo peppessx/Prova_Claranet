@@ -1,0 +1,14 @@
+---
+# Impostazioni di sistema
+php_modules: [ 'php-curl', 'php-gd', 'php-mbstring', 'php-xml', 'php-xmlrpc', 'php-soap', 'php-intl', 'php-zip' ]
+
+# Impostazioni Mysql
+mysql_root_password: "Avantitutta@"
+mysql_db: "wordpress"
+mysql_user: "valentino"
+mysql_password: "Avanti@"
+
+# Impostazioni HTTP
+http_host: ""
+http_conf: "wordpr.conf"
+http_port: "80"

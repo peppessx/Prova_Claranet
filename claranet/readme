@@ -1,0 +1,48 @@
+******* 1 Esercizio ********
+
+Per svolgere questo esercizio è stato usando il comando sed , è stato richiesto di sostituire le occorrenze ricorsivamente e per farlo è stata utilizzata l'opzione -i
+Inoltre, ho inserito un messaggio all'avvio che guida l'utente al corretto avvio dello script (path dove posizionarsi)
+
+
+******* 2 Esercizio ********
+
+Come nell'esercizio precendete, è stato inserito un messaggio che guida l'utente all'inserimento del path dove cercare gli script
+Sono stati utilizzati i comandi find,grep e awk, nello specifico :
+
+
+find . -type f ---> Trova solo file 
+grep -r -h -m1 ---> -r Usato per leggere tutti i file nella dir inserita  ;  -h Per non far apparire il suffisso del file in output ; m1 Usato per stampare la 1riga
+awk '{print NR,$0}' ---> Utilizzato per contare il numero di script/file
+
+Nota: Sulla find per trovare solamente gli script ho pensato varie possibilità come una find -executable (per trovare solo file eseguibili), ma rileggendo il testo veniva specificato più volte file e alla fine ho optato per la soluzione indicata sopra. 
+Stesso vale per il conteggio dei file , il più immediato era wc -l ma usando quel comando non riuscivo a stampare le righe a video
+
+
+
+******* 3 Esercizio ********
+
+Partendo da una VM Ubuntu pulita è stato necessario configurare dei prerequisti quali :
+
+1) Installare ssh
+2) Abilitare l'autenticazione pubblica nel sshd_config & la login con utenza di root (Per mancanza di tempo non ho effettuato il task della creazione e copia delle chiavi)
+
+PubkeyAuthentication yes
+PermitRootLogin yes              
+
+3) CONFIGURARE FILE HOST ANSIBLE /etc/ansible/hosts, è stato necessario specificare il path del python interpreter (per Ubuntu)
+
+[wordpress]
+"ip machcina" ansible_ssh_pass="pass" ansible_ssh_user=root ansible_python_interpreter=/usr/bin/python3
+
+/wordpress/vars/default.yml  ---> Playbook per la definizione di alcuni parametri quali : -Definizione dei moduli php ; -Impostazioni Mysql ; -Impostazioni http
+
+/wordpress/files/  ---> File di conf per apache
+
+/wordpress/wordpress.yml ---> Playbook per installare wordpress con la definizione dei task che viene accompagnata dalla descrizione delle istruzioni che esegue
+
+COMANDO PER LANCIARE PLAYBOOK
+ansible-playbook wordpress.yml -l wordpress
+
+
+
+
